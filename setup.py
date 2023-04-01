@@ -10,7 +10,7 @@ setup(
     packages=find_packages('src'),
     package_dir={'': 'src'},
     url='https://github.com/Adhikari-Ashutosh/DARWiN',
-    keywords='ML NeuroNET',
+    keywords='ML NeuralNET',
     install_requires=[
           'numpy',
       ],
