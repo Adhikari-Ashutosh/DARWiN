@@ -1,6 +1,5 @@
 from setuptools import setup, find_packages
 
-
 setup(
     name='DARWiN',
     version='0.0.0',
@@ -14,5 +13,4 @@ setup(
     install_requires=[
           'numpy',
       ],
-
 )
