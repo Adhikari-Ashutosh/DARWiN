@@ -60,26 +60,8 @@ class FFN:
         farr = [binstep , linear , argmax , sigmoid , tanh , relu , lrelu , elu , swish]
         fn = farr[i]
         return fn(x)
-
-
-        
-        
-
-
-
-class NEU:
-
-    def __init__(self,Is,Os,Nl,Sl,random_state) -> None:
-        '''
-        Is Stands for Input size
-        Os Stands for Output size
-        Nl Stands for Number of Layers
-        Sl Stands for Size of Layers
-        random_state gives you the power to replicate a NEU
-        '''
-        self.input = np.array(shape=( 1 , Is+1 ))
-        self.layers = FFN(Is,Os,Nl,random_state)
-        self.output = np.array(shape = ( 1 , Os ))
-    
-
-
+    def cust_set(self,weights,biases,activations):
+        # When we want to set the properties externally (Hoping that the sizes of the net wouldn't change)
+        self.weights = weights
+        self.biases = biases
+        self.activations = activations 
