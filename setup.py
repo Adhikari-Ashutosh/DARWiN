@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='DARWiN',
+    name='SynapEvo',
     version='0.0.0',
     license='MIT',
     author="Ashutosh Adhikari,Ananya Datta,Aditya Kothari",
@@ -13,4 +13,6 @@ setup(
     install_requires=[
           'numpy',
       ],
+    setup_requires=['pytest-runner'],
+    tests_require=['pytest==4.4.1'],
 )
