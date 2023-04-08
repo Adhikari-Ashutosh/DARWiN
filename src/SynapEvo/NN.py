@@ -33,6 +33,7 @@ class FFN:
         self.inp = input_size
         self.out = output_size
         self.layer_sizes = layers_sizes
+        self.score = 0
         
         if random_state:
             np.random.seed(random_state)
@@ -40,16 +41,16 @@ class FFN:
         for i in range(nlayers):
             if i == 0:
                 # The first layer weight matrix includes the input size
-                self.weights.append(np.random.rand(input_size, layers_sizes))
+                self.weights.append(np.random.randn(input_size, layers_sizes))
             elif i == nlayers - 1:
                 # The last layer weight matrix includes the output size
-                self.weights.append(np.random.rand(layers_sizes, output_size))
+                self.weights.append(np.random.randn(layers_sizes, output_size))
             else:
                 # Subsequent layers have weights only based on the layer size
-                self.weights.append(np.random.rand(layers_sizes, layers_sizes))
+                self.weights.append(np.random.randn(layers_sizes, layers_sizes))
             
             # Biases are added for every layer
-            self.biases.append(np.random.rand(layers_sizes))
+            self.biases.append(np.random.randn(layers_sizes))
             self.activations.append(np.random.choice(range(8),layers_sizes))
 
     def forward(self , x):
@@ -60,17 +61,9 @@ class FFN:
         return x
 
     def activation(self, x, i):
-        x1 = np.array(x)
-        farr = [ binstep , linear , sigmoid , tanh , relu , lrelu , elu , swish]
-        get_func = lambda x : farr[x]
-        vect_get_func = np.vectorize(get_func)
-        # Vectorized method to get every sort of function mapping
-        
-
-
-        
-
-        return 
+        farr = [binstep, linear, sigmoid, tanh, relu, lrelu, elu, swish]
+        return np.vectorize(lambda a, b: farr[b](a))(x, i)
+    
     def cust_set(self,weights,biases,activations):
         # When we want to set the properties externally (Hoping that the sizes of the net wouldn't change)
         self.weights = weights
