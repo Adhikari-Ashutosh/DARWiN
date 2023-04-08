@@ -1,4 +1,4 @@
-from DARWiN import NN
+from SynapEvo import NN
 import numpy as np
 def activations():
     works = False

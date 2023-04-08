@@ -42,16 +42,20 @@ class FFN:
             if i == 0:
                 # The first layer weight matrix includes the input size
                 self.weights.append(np.random.randn(input_size, layers_sizes))
+                self.biases.append(np.random.randn(layers_sizes))
+                self.activations.append(np.random.choice(range(8), layers_sizes)
             elif i == nlayers - 1:
                 # The last layer weight matrix includes the output size
                 self.weights.append(np.random.randn(layers_sizes, output_size))
+                self.biases.append(np.random.randn(output_size))
+                self.activations.append(np.random.choice(range(8), output_size))
             else:
                 # Subsequent layers have weights only based on the layer size
                 self.weights.append(np.random.randn(layers_sizes, layers_sizes))
-            
-            # Biases are added for every layer
-            self.biases.append(np.random.randn(layers_sizes))
-            self.activations.append(np.random.choice(range(8),layers_sizes))
+                self.biases.append(np.random.randn(layers_sizes))
+                self.activations.append(np.random.choice(range(8), layers_sizes))
+
+
 
     def forward(self , x):
         x = np.array(x)
@@ -69,5 +73,4 @@ class FFN:
         self.weights = weights
         self.biases = biases
         self.activations = activations 
-testNet = FFN(3,3,3,5)
-print(testNet.forward([1,2,3]))
+
