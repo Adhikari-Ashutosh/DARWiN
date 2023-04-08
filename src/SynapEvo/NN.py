@@ -43,7 +43,7 @@ class FFN:
                 # The first layer weight matrix includes the input size
                 self.weights.append(np.random.randn(input_size, layers_sizes))
                 self.biases.append(np.random.randn(layers_sizes))
-                self.activations.append(np.random.choice(range(8), layers_sizes)
+                self.activations.append(np.random.choice(range(8), layers_sizes))
             elif i == nlayers - 1:
                 # The last layer weight matrix includes the output size
                 self.weights.append(np.random.randn(layers_sizes, output_size))

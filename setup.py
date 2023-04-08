@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='SynapEvo',
-    version='0.1.1',
+    version='0.1.2',
     license='MIT',
     author="Ashutosh Adhikari,Ananya Datta,Aditya Kothari",
     author_email='email@example.com',
