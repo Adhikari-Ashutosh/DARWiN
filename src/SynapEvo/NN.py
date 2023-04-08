@@ -1,5 +1,5 @@
 import numpy as np
-
+# 0 to 1
 def binstep(x):
     return 1 if x > 0 else (0 if x == 0 else -1)
     
