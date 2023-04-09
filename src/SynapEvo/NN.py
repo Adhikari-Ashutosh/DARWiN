@@ -1,11 +1,11 @@
 import numpy as np
-# 0 to 1
+# threshold function to create binary outputs
 def binstep(x):
     return 1 if x > 0 else (0 if x == 0 else -1)
-    
+      
 def linear(x):
     return x
-    
+# activation functions  
 def sigmoid(x):
     return 1/(1 + np.exp(-x))
     
@@ -23,6 +23,8 @@ def elu(x):
 
 def swish(x):
     return x * 1/(1 + np.exp(-x)) 
+
+# feedforward neural network 
 class FFN:
     def __init__(self , input_size , output_size , layers_sizes , nlayers , random_state=None):
         
@@ -56,7 +58,7 @@ class FFN:
                 self.activations.append(np.random.choice(range(8), layers_sizes))
 
 
-
+    # to compute the forward pass
     def forward(self , x):
         x = np.array(x)
         for i in range(self.nlayers):
@@ -64,10 +66,12 @@ class FFN:
             x = self.activation(x , self.activations[i])
         return x
 
+    # applying different activation functions
     def activation(self, x, i):
         farr = [binstep, linear, sigmoid, tanh, relu, lrelu, elu, swish]
         return np.vectorize(lambda a, b: farr[b](a))(x, i)
     
+    # to set network weights, baises and activation functions externally
     def cust_set(self,weights,biases,activations):
         # When we want to set the properties externally (Hoping that the sizes of the net wouldn't change)
         self.weights = weights

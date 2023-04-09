@@ -1,5 +1,6 @@
 import numpy as np
 from SynapEvo.NN import FFN
+# class to represent the genetic algorithm for a FFN
 class Population:
     def __init__(self ,  input_size , output_size , layers_sizes , nlayers , np_nr, population_size, parent_percentage , mutation_rate , random_state=None):
         self.size = population_size
@@ -11,12 +12,14 @@ class Population:
     def get_populations(self):
         return self.population
     
+    # to rank the NNs based on fitness scores
     def rank(self,Pop):
         scores = np.array([ffn.score for ffn in Pop])
         sorted_indices = np.argsort(scores)[::-1]  # reverse order to get descending
         sorted_ffns = np.array(Pop)[sorted_indices]  # use the indices to sort the array
         return sorted_ffns
-        
+    
+    # select top %age of NNs to be parents for next gen
     def select_parents(self):
         # select the best pr(parent rate) of NN layers as parents
         num_parents = int(self.size * self.pr)
@@ -25,6 +28,7 @@ class Population:
         parents = np.array(parents).flatten()
         return parents
 
+    # to breed a new population
     def breed_population(self, parents):
         # create new population by mixing parents' weights and biases with some mutation
         new_population = []
@@ -65,12 +69,16 @@ class Population:
         for i in range(num_random):
             child = FFN(parentref.inp, parentref.out, parentref.layer_sizes, parentref.nlayers)
             new_population.append(child)
-        self.population = new_population    
+        self.population = new_population 
+
+    # performs evolution process   
     def evolve(self, RatedPopN):
         self.population = self.rank(RatedPopN)
         parents = self.select_parents()
         self.breed_population(parents)
         return self.population
+    
+    # returns the best-performing individual
     def getbest(self):
         self.population = self.rank(self.population)
         return self.population[0]
